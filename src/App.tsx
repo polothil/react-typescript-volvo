@@ -1,9 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-
 import Home from './components/Home/Home';
-import './App.css';
 import Learn from './components/Learn/Learn';
 import Shop from './components/Shop/shop';
+import './App.css';
 
 const App: React.FC = () => {
   return (
