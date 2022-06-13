@@ -19,6 +19,14 @@ type CarouselProps = {
   }[];
 };
 
+type carProps = {
+  id: string;
+  modelName: string;
+  bodyType: string;
+  modelType: string;
+  imageUrl: string;
+};
+
 const Carousel: React.FC<CarouselProps> = ({ cars }) => {
   const slider = useRef(null);
 
@@ -27,7 +35,7 @@ const Carousel: React.FC<CarouselProps> = ({ cars }) => {
   // };
 
   // const showNext = () => {
-  //   slider.current.slickNext();
+  //   slider.current && slider.current.slickNext();
   // };
 
   const settings = {
@@ -70,7 +78,7 @@ const Carousel: React.FC<CarouselProps> = ({ cars }) => {
   return (
     <main className='container'>
       <Slider {...settings} ref={slider}>
-        {cars.map((car: any) => (
+        {cars.map((car: carProps) => (
           <div className='slider-card' key={car.id}>
             <div className='type'>{car.bodyType}</div>
             <div className='title'>

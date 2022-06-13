@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import Search from '../Search/Search';
 import Carousel from '../Carousel/Carousel';
 
-export type carProps = {
+type carProps = {
   id: string;
   modelName: string;
   bodyType: string;
