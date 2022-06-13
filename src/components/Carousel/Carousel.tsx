@@ -30,13 +30,15 @@ type carProps = {
 const Carousel: React.FC<CarouselProps> = ({ cars }) => {
   const slider = useRef(null);
 
-  // const showPrevious = () => {
-  //   slider.current && slider.current.slickPrev();
-  // };
+  const showPrevious = () => {
+    // @ts-ignore
+    if (slider.current !== null) slider.slickPrev();
+  };
 
-  // const showNext = () => {
-  //   slider.current && slider.current.slickNext();
-  // };
+  const showNext = () => {
+    // @ts-ignore
+    if (slider.current !== null) slider.current.slickNext();
+  };
 
   const settings = {
     dots: false,
@@ -98,7 +100,7 @@ const Carousel: React.FC<CarouselProps> = ({ cars }) => {
           </div>
         ))}
       </Slider>
-      {/* <div className='buttons left'>
+      <div className='buttons left'>
         <img
           width={40}
           src={bigChevron}
@@ -109,7 +111,7 @@ const Carousel: React.FC<CarouselProps> = ({ cars }) => {
       </div>
       <div className='buttons right'>
         <img width={40} src={bigChevron} alt='' onClick={showNext} />
-      </div> */}
+      </div>
     </main>
   );
 };
