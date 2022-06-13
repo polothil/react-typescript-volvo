@@ -72,9 +72,10 @@
   margin-top: 2px;
 }
 
-@media (max-width: 800px) {
-  .slider-card .title span {
-    display: block;
+@media (max-width: 1200px) {
+  .slider-card .title {
+    display: flex;
+    flex-direction: column;
   }
 
   .buttons {

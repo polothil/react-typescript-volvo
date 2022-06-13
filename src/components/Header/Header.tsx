@@ -1,11 +1,14 @@
 import React from 'react';
 import './Header.css';
+import { Logo } from 'vcc-ui';
 
 const Header = () => {
   return (
     <nav className='nav'>
       <h1>
-        <a href='/'>VOLVO</a>
+        <a href='/'>
+          <Logo type='spreadmark' height={14} />
+        </a>
       </h1>
       <ul>
         <li>
