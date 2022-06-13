@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { View, Button } from 'vcc-ui';
 import carsData from '../../cars.json';
 import './Learn.css';
 
@@ -41,7 +42,9 @@ const Learn = () => {
         {carDetails && renderCars()}
         {carDetails !== undefined && (
           <div className='btn-group'>
-            <button onClick={() => history(`/`)}>Back to home</button>
+            <View maxWidth='280'>
+              <Button onClick={() => history(`/`)}>Back to home</Button>
+            </View>
           </div>
         )}
       </div>
