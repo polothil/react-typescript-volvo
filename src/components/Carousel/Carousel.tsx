@@ -28,22 +28,19 @@ type carProps = {
 };
 
 const Carousel: React.FC<CarouselProps> = ({ cars }) => {
-  const slider = useRef(null);
+  const slider = useRef<Slider>(null);
 
   const showPrevious = () => {
-    // @ts-ignore
-    if (slider.current !== null) slider.slickPrev();
+    if (slider.current !== null) slider.current.slickPrev();
   };
 
   const showNext = () => {
-    // @ts-ignore
     if (slider.current !== null) slider.current.slickNext();
   };
 
   const settings = {
     dots: false,
     infinite: false,
-    speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
