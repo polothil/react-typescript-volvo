@@ -27,8 +27,8 @@ const Learn = () => {
         {carDetails && (
           <>
             <h1>{carDetails[0].modelName}</h1>
-            <h2>{carDetails[0].bodyType}</h2>
-            <h2>{carDetails[0].modelType}</h2>
+            <h2>{carDetails[0].bodyType.toUpperCase()}</h2>
+            <h2>{carDetails[0].modelType.toUpperCase()}</h2>
             <img src={carDetails[0].imageUrl} alt='' />
           </>
         )}
