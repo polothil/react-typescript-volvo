@@ -6,8 +6,8 @@
   align-items: center;
 }
 
-@media (max-width: 600px) {
-  .nav a {
-    margin: auto;
+@media (max-width: 900px) {
+  .nav {
+    justify-content: center;
   }
 }

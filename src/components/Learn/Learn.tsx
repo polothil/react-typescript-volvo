@@ -33,7 +33,7 @@ const Learn = () => {
     fetchData();
   }, [id]);
 
-  const renderCars = () => {
+  const renderCar = () => {
     return (
       <>
         {carDetails && (
@@ -54,7 +54,7 @@ const Learn = () => {
         <div>Loading...</div>
       ) : (
         <div className='content'>
-          {carDetails && renderCars()}
+          {carDetails && renderCar()}
           {carDetails !== undefined && (
             <div className='btn-group'>
               <View maxWidth='280'>

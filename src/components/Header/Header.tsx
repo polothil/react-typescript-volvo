@@ -1,13 +1,14 @@
 import React from 'react';
 import './Header.css';
 import { Logo } from 'vcc-ui';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <nav className='nav'>
-      <a href='/'>
+      <Link to='/'>
         <Logo type='spreadmark' height={14} />
-      </a>
+      </Link>
     </nav>
   );
 };

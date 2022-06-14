@@ -2,3 +2,10 @@
   width: 50%;
   margin: auto;
 }
+
+@media (max-width: 900px) {
+  .filter {
+    padding: 0 10px;
+    width: 90%;
+  }
+}
