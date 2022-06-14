@@ -18,9 +18,9 @@ const Home: React.FC = () => {
   const [cars, setCars] = useState<carProps[]>(carsData);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCars, setFilteredCars] = useState<carProps[]>([]);
-  const [value, setValue] = React.useState('C30');
 
   useEffect(() => {
+    setCars(carsData);
     if (searchTerm !== '') {
       const newList: carProps[] = cars.filter((car) => {
         return car.bodyType.toLowerCase().includes(searchTerm.toLowerCase());
@@ -29,19 +29,7 @@ const Home: React.FC = () => {
     } else {
       setFilteredCars(cars);
     }
-  }, [searchTerm]);
-
-  const handleChange = (filterStr: string) => {
-    setSearchTerm(filterStr);
-    if (filterStr !== '') {
-      const newList: carProps[] = cars.filter((car) => {
-        return car.bodyType.toLowerCase().includes(filterStr.toLowerCase());
-      });
-      setFilteredCars(newList);
-    } else {
-      setFilteredCars(cars);
-    }
-  };
+  }, [searchTerm, cars]);
 
   return (
     <>
@@ -56,7 +44,9 @@ const Home: React.FC = () => {
         />
       </div>
       {cars.length > 0 && searchTerm.length < 1 ? (
-        <Carousel cars={cars} />
+        <>
+          <Carousel cars={cars} />
+        </>
       ) : (
         <Carousel cars={filteredCars} />
       )}
