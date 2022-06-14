@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { View, Button } from 'vcc-ui';
-import carsData from '../../cars.json';
 import './Learn.css';
 
 type carProps = {
@@ -14,11 +13,24 @@ type carProps = {
 
 const Learn = () => {
   const [carDetails, setCarDetails] = useState<carProps[]>();
+  const [loading, setLoading] = useState(false);
   const history = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    setCarDetails(carsData.filter((car) => car.id === id));
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/cars.json`);
+        const data = await res.json();
+        setCarDetails(data.filter((car: carProps) => car.id === id));
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, [id]);
 
   const renderCars = () => {
@@ -38,16 +50,20 @@ const Learn = () => {
 
   return (
     <>
-      <div className='content'>
-        {carDetails && renderCars()}
-        {carDetails !== undefined && (
-          <div className='btn-group'>
-            <View maxWidth='280'>
-              <Button onClick={() => history(`/`)}>Back to home</Button>
-            </View>
-          </div>
-        )}
-      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className='content'>
+          {carDetails && renderCars()}
+          {carDetails !== undefined && (
+            <div className='btn-group'>
+              <View maxWidth='280'>
+                <Button onClick={() => history(`/`)}>Back to home</Button>
+              </View>
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 };

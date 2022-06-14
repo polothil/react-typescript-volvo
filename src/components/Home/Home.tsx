@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import carsData from '../../cars.json';
 import { useState } from 'react';
 import Header from '../Header/Header';
 import Carousel from '../Carousel/Carousel';
@@ -15,40 +14,62 @@ type carProps = {
 };
 
 const Home: React.FC = () => {
-  const [cars, setCars] = useState<carProps[]>(carsData);
+  const [cars, setCars] = useState<carProps[]>();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCars, setFilteredCars] = useState<carProps[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setCars(carsData);
-    if (searchTerm !== '') {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`api/cars.json`);
+        const data = await res.json();
+        setCars(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (cars && searchTerm !== '') {
       const newList: carProps[] = cars.filter((car) => {
         return car.bodyType.toLowerCase().includes(searchTerm.toLowerCase());
       });
       setFilteredCars(newList);
     } else {
-      setFilteredCars(cars);
+      cars && setFilteredCars(cars);
     }
   }, [searchTerm, cars]);
 
   return (
     <>
       <Header />
-      <div className='filter'>
-        <TextInput
-          value={searchTerm}
-          label='Filter by car type'
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-        />
-      </div>
-      {cars.length > 0 && searchTerm.length < 1 ? (
-        <>
-          <Carousel cars={cars} />
-        </>
+      {loading ? (
+        <div>Loading...</div>
       ) : (
-        <Carousel cars={filteredCars} />
+        <>
+          <div className='filter'>
+            <TextInput
+              value={searchTerm}
+              label='Filter by car type'
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+            />
+          </div>
+          {cars && cars.length > 0 && searchTerm.length < 1 ? (
+            <>
+              <Carousel cars={cars} />
+            </>
+          ) : (
+            <Carousel cars={filteredCars} />
+          )}
+        </>
       )}
     </>
   );
